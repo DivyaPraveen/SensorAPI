@@ -7,6 +7,7 @@
     - Query sensor metric (min,max and average) of a date range by sensor id
     - Unit test- 92% code coverage
     - Postman collection is at docs/weather-api-postman.json
+    - Monitoring 
 
 ## Libraries and Technologies used
     - Docker
@@ -14,6 +15,7 @@
     - Mapstruct mapping library
     - DynamoDb interacting with LocalStack with Spring Data
     - GitHub
+    - Spring actuator for monitoring
 
  **This application uses docker container localstack/localstack.**
 
@@ -72,6 +74,10 @@ GET http://localhost:8080/v0/A001/date?dateFrom=2023-03-27&dateTo=2023-03-30
 GET http://localhost:8080/v0/A001/date?dateFrom=&dateTo= 
 
 GET http://localhost:8080/v0/id?sensorId=134
+
+### Actuator endpoints :
+    http://localhost:8080/actuator
+This helps you monitoring ex: http://localhost:8080/actuator/metrics/system.cpu.usage
 
 Incomplete scenarios:
    -  WindSpeed Metric yet to be added
