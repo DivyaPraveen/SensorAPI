@@ -23,7 +23,7 @@
  To spin up local stack container, run this
 
 ```
-docker run --rm -it -p 4566:4566 -p 4510-4559:4510-4559 localstack/localstack
+docker run --rm -it -p 4566:4566 localstack/localstack
 ```
 
 ## Step:2 
