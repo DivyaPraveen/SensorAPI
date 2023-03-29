@@ -5,6 +5,8 @@
         It accepts the field based on com/app/weather/models/SensorRequest.java
     - Get list of sensor data by sensor id.
     - Query sensor metric (min,max and average) of a date range by sensor id
+    - Unit test- 92% code coverage
+    - Postman collection is at docs/weather-api-postman.json
 
 ## Libraries and Technologies used
     - Docker
@@ -31,7 +33,7 @@ export AWS_SECRET_ACCESS_KEY="test"
 export AWS_DEFAULT_REGION="us-east-1"
 ```
 
-#Create dynamo db table with the following script
+#Create dynamo db table **SensorDataInfo** with the following script
 
 ```
 aws  --endpoint-url=http://localhost:4566 \
@@ -45,7 +47,7 @@ AttributeName=sensorId,KeyType=RANGE \
 --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
 --global-secondary-indexes 'IndexName=sensoridCreateTs,KeySchema=[{AttributeName=sensorId,KeyType=HASH},{AttributeName=createTs,KeyType=RANGE}],Projection={ProjectionType=ALL},ProvisionedThroughput={ReadCapacityUnits=10,WriteCapacityUnits=5}'
 ```
-You can test the connection of local stack using the following script 
+You can see the entries in the table with these script
 
 ```
 aws --endpoint-url=http://localhost:4566 --region=us-east-1 dynamodb scan --table-name SensorDataInfo
@@ -65,12 +67,15 @@ POST http://localhost:8080/v0/sensor
 
 GET http://localhost:8080/v0/A001/date?dateFrom=2023-03-27&dateTo=2023-03-30
 
+//If you don't pass any values, current date metrics are fetched
+
+GET http://localhost:8080/v0/A001/date?dateFrom=&dateTo= 
+
 GET http://localhost:8080/v0/id?sensorId=134
 
 Incomplete scenarios:
    -  WindSpeed Metric yet to be added
-   - Swagger extension
-
+   -  Sum is not calculated
 
 
 

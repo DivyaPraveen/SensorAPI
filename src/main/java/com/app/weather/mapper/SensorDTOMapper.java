@@ -15,10 +15,20 @@ import java.time.LocalDate;
 @MapperConfig(
         componentModel = "spring")
 public interface SensorDTOMapper {
+    /**
+     * This mapper converts SensorRequest to  SensorDataInfo
+     * createts is set to the current date
+     * @param request
+     * @return
+     */
     @Mapping(target = "createTs", expression = "java(LocalDate.now())")
     SensorDataInfo mapRequest(SensorRequest request);
 
-
+    /**
+     * This mapper converts SensorDataInfo to SensorResponse
+     * @param dataInfo
+     * @return
+     */
     SensorResponse mapResponse(SensorDataInfo dataInfo);
 
 }

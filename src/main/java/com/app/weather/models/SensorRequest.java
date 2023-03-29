@@ -9,7 +9,6 @@ public class SensorRequest {
 
     private String sensorId;
     private String tempData;
-
     private String humidityData;
 
 

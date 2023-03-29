@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
+/**
+ * Utility class of SensorProcessor
+ */
 public class SensorProcessorUtil {
 
     protected SensorResponse findMetrics(@NotEmpty @NotNull List<SensorResponse> sensorResponseList) {

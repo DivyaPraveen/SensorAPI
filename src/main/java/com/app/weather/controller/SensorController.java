@@ -25,12 +25,18 @@ public class SensorController {
         this.processor = processor;
     }
 
+    /**
+     * Saves a sensor's data
+     */
     @SneakyThrows
     @PostMapping("/sensor")
     public ResponseEntity<SensorResponse> saveSensorData(@RequestBody SensorRequest sensorRequest) {
         return new ResponseEntity<>(processor.save(sensorRequest), HttpStatus.CREATED);
     }
 
+    /**
+     * Fetch Sensor data based on sensorId
+     */
     @SneakyThrows
     @GetMapping("/id")
     public ResponseEntity<List<SensorResponse>> getSensorById(
@@ -40,6 +46,10 @@ public class SensorController {
         return ResponseEntity.ok(processor.getSensorDataList(sensorId));
     }
 
+    /**
+     * Get min,max,average information of a sensor of a data range from dateFrom and dateTo
+     * If data infos are not passed it returns the current date's metrics
+     */
     @SneakyThrows
     @GetMapping("/{sensorId}/date")
     public ResponseEntity<SensorResponse> getMetrics(@PathVariable("sensorId") String sensorId,

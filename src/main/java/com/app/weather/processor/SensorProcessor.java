@@ -18,8 +18,8 @@ import java.util.List;
 @Configuration
 @Slf4j
 public class SensorProcessor extends SensorProcessorUtil {
-    private SensorDTOMapper sensorDTOMapper;
-    private ISensorRepo sensorRepository;
+    private final SensorDTOMapper sensorDTOMapper;
+    private final ISensorRepo sensorRepository;
 
     @Autowired
     public SensorProcessor(@Qualifier("sensorDTOMapper") SensorDTOMapper sensorDTOMapper, ISensorRepo sensorRepository) {

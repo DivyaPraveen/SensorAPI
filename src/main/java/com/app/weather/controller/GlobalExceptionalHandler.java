@@ -11,24 +11,25 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
+//Todo: Extend an error class instead of ResponseEntity<Object> to respond in some code and message
 public class GlobalExceptionalHandler
         extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value
             = {IllegalArgumentException.class, IllegalStateException.class, NullPointerException.class})
-    protected ResponseEntity<Object> handleConflict(
+    protected ResponseEntity<Object> illegalState(
             RuntimeException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage(); // Todo: Refine error message as per the requirement
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
-    //Todo: Extend an error class instead of object to respond in some code and message
+
     @ExceptionHandler(value
             = {ResourceNotFoundException.class})
     protected ResponseEntity<Object> dbResourceNotFound(
             RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = "Database resource not found";
+        String bodyOfResponse = ex.getMessage();
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
